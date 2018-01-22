@@ -1,0 +1,17 @@
+[PHP]
+
+; Todas as variáveis omitidas irão assumir o valor default a elas
+; atribuidas na compilação do binário. Caso queira alterar uma
+; definição que não está neste arquivo, basta adicioná-la abaixo.
+;
+; Este arquivo em sua versão original pode ser encontrado em:
+; https://github.com/fabiojaniolima/docker-images/tree/master/php
+
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
+
+display_errors = Off
+display_startup_errors = Off
+mysqlnd.collect_memory_statistics = Off
+zend.assertions = -1
+
+upload_max_filesize = 10M

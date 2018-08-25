@@ -30,7 +30,11 @@ RUN apt-get update && \
     docker-php-ext-install mysqli pdo_mysql pgsql pdo_pgsql; \
     \
     # Implementa uma interface de baixo nível para funções de comunicação sockets
-    docker-php-ext-install sockets
+    docker-php-ext-install sockets; \
+    \
+    # Instala a extensão soap
+    apt-get install -y libxml2-dev && \
+    docker-php-ext-install soap
 
 # arquivos de configuração do Apache e PHP
 COPY config /usr/src/fabiojanio

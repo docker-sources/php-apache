@@ -27,7 +27,10 @@ RUN apt-get update && \
     # Instala as extensões PHP "mysqli pdo_mysql pgsql pdo_pgsql"
     apt-get install -y --no-install-recommends libpq-dev && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
-    docker-php-ext-install mysqli pdo_mysql pgsql pdo_pgsql
+    docker-php-ext-install mysqli pdo_mysql pgsql pdo_pgsql; \
+    \
+    # Implementa uma interface de baixo nível para funções de comunicação sockets
+    docker-php-ext-install sockets
 
 # arquivos de configuração do Apache e PHP
 COPY config /usr/src/fabiojanio

@@ -7,7 +7,7 @@ branches:
 
 env:
   global:
-    - VERSION=7.2 VARIANT=stretch
+    - VERSION=7.2 VARIANT=slim
 
 before_script:
   - env | sort

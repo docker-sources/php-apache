@@ -3,26 +3,31 @@ FROM php:7.2-apache
 MAINTAINER Fabio J L Ferreira <fabiojaniolima@gmail.com>
 
 # Pode assumir "prod" ou "dev"
-# Default: prod
 ENV TIPO_AMBIENTE=prod
 
 # Instala e configura componentes essenciais
 RUN apt-get update && \
     a2enmod rewrite && \
-    apt-get install -y --no-install-recommends unzip git && \
+    apt-get install -y --no-install-recommends unzip && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer; \
     echo "America/Sao_Paulo" > /etc/timezone; \
     # Uma versão mínima será gerada na criação do container
-    rm -f /etc/apache2/sites-enabled/000-default.conf; \
-    \
-    # Instala a extensão PHP "DG" => http://php.net/manual/pt_BR/book.image.php
-    apt-get install -y --no-install-recommends libjpeg-dev libpng-dev && \
+    rm -f /etc/apache2/sites-enabled/000-default.conf
+
+# Instala extensões adicionais do PHP
+# Extensão "DG" => http://php.net/manual/pt_BR/book.image.php
+RUN apt-get install -y --no-install-recommends libjpeg-dev libpng-dev && \
     docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install gd; \
     \
     # Instala a extensão PHP "exif" => http://php.net/manual/pt_BR/intro.exif.php
     apt-get install -y --no-install-recommends libexif-dev && \
     docker-php-ext-install exif; \
+    \
+    # Extensão PHP para Internacionalização => http://php.net/manual/pt_BR/book.intl.php
+    apt-get install -y --no-install-recommends libicu-dev && \
+    docker-php-ext-configure intl && \
+    docker-php-ext-install intl; \
     \
     # Instala as extensões PHP "mysqli pdo_mysql pgsql pdo_pgsql"
     apt-get install -y --no-install-recommends libpq-dev && \
@@ -33,7 +38,7 @@ RUN apt-get update && \
     docker-php-ext-install sockets; \
     \
     # Instala a extensão soap
-    apt-get install -y libxml2-dev && \
+    apt-get install -y --no-install-recommends libxml2-dev && \
     docker-php-ext-install soap
 
 # arquivos de configuração do Apache e PHP

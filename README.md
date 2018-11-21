@@ -1,4 +1,4 @@
-# php-apache:7.2-stretch
+# php-apache:7.2-slim
 
 <p align="center">
 	<img alt="logo-docker" class="avatar rounded-2" height="150" src="https://avatars2.githubusercontent.com/u/35675959?s=400&u=b1f9ebca6fa8e5be55cb524e16f38b52f2f1dd58&v=4" width="160">
@@ -19,12 +19,11 @@ Consulte a guia [Tags](https://hub.docker.com/r/fabiojanio/php-apache/tags/) no 
 
 ## Pacotes presentes na imagem
 
- - Apache 2.4
- - PHP 7.2
+ - Apache 2.4.25
+ - PHP 7.2.*
  - Composer
  - curl
  - unzip
- - git
 
 ## Módulos PHP ativos
 
@@ -42,6 +41,7 @@ Lista de módulos ativos presentes na imagem:
  - gd
  - hash
  - iconv
+ - intl
  - json
  - libxml
  - mbstring
@@ -77,9 +77,9 @@ Lista de módulos ativos presentes na imagem:
  - **php.ini** limpo e definido como *dev* ou *prod*
  - **TIPO_AMBIENTE** define o tipo de container (*dev* ou *prod*)
 
-A variável de ambiente **TIPO_AMBIENTE** PODE assumir o valor **prod** ou **dev**, por padrão assume **prod**. Com base nessa atribuição de valor, flags de erro do PHP e definições especificas do Apache serão aplicadas, consulte o diretório [**config**](config).
+A variável de ambiente **TIPO_AMBIENTE** PODE assumir o valor **prod** ou **dev**, por padrão assume **prod**. Com base nessa atribuição de valor, flags de erro do PHP e definições especificas do Apache serão aplicadas, consulte o diretório [**config**](https://github.com/docker-sources/php-apache/tree/master/config).
 
-**Sugestão**: Você PODE utilizar um volume compartilhado para os arquivos de **VirtualHost** do Apache, essa abordagem pode ser bem vinda em ambiente de desenvolvimento, onde nem sempre faz sentido ter multiplus containers. Para um exemplo prático consultei o arquivo [**docker-compose.yml**](docker-compose.yml).
+**Sugestão**: Você PODE utilizar um volume compartilhado para os arquivos de **VirtualHost** do Apache, essa abordagem pode ser bem vinda em ambiente de desenvolvimento, onde nem sempre faz sentido ter multiplus containers. Para um exemplo prático consultei o arquivo [**docker-compose.yml**](https://github.com/docker-sources/php-apache/blob/master/docker-compose.yml).
 
 ## Start container
 
@@ -107,7 +107,7 @@ docker exec -it nome_do_container /bin/bash
 
 ## docker-compose.yml
 
-Para subir o ambiente utilizando o docker-compose, efetue o download do arquivo [**docker-compose.yml**](docker-compose.yml), acesse o diretório onde o arquivo foi baixado e execute:
+Para subir o ambiente utilizando o docker-compose, efetue o download do arquivo [**docker-compose.yml**](https://github.com/docker-sources/php-apache/blob/master/docker-compose.yml), acesse o diretório onde o arquivo foi baixado e execute:
 
 ```
 docker-compose up -d
@@ -121,7 +121,7 @@ docker exec -it nome_do_container /bin/bash
 
 ## Build (opcional)
 
-Os passos anteriores estão configurados para utilizar a imagem já compilada disponível no **Docker Hub**, entretanto, caso queira compilar sua própria imagem, basta efetuar o download do arquivo [**Dockerfile**](Dockerfile) e executar a instrução:
+Os passos anteriores estão configurados para utilizar a imagem já compilada disponível no **Docker Hub**, entretanto, caso queira compilar sua própria imagem, basta efetuar o download do arquivo [**Dockerfile**](https://github.com/docker-sources/php-apache/blob/master/Dockerfile) e executar a instrução:
 
 ```
 docker build -t nome_da_nova_imagem:nome_da_tag .
@@ -141,4 +141,4 @@ docker exec -it nome_do_container /bin/bash
 
 ## Licença MIT
 
-Para maiores informações, leia o arquivo de [licença](LICENSE) disponível neste repositório.
+Para maiores informações, leia o arquivo de [licença](https://github.com/docker-sources/php-apache/blob/master/LICENSE) disponível neste repositório.

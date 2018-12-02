@@ -69,6 +69,7 @@ Lista de módulos ativos presentes na imagem:
  - xml
  - xmlreader
  - xmlwriter
+ - Zend OPcache
  - zlib
 
 ## Considerações relevantes
@@ -80,6 +81,26 @@ Lista de módulos ativos presentes na imagem:
 A variável de ambiente **TIPO_AMBIENTE** PODE assumir o valor **prod** ou **dev**, por padrão assume **prod**. Com base nessa atribuição de valor, flags de erro do PHP e definições especificas do Apache serão aplicadas, consulte o diretório [**config**](https://github.com/docker-sources/php-apache/tree/master/config).
 
 **Sugestão**: Você PODE utilizar um volume compartilhado para os arquivos de **VirtualHost** do Apache, essa abordagem pode ser bem vinda em ambiente de desenvolvimento, onde nem sempre faz sentido ter multiplus containers. Para um exemplo prático consultei o arquivo [**docker-compose.yml**](https://github.com/docker-sources/php-apache/blob/master/docker-compose.yml).
+
+**ATENÇÃO**: no modo de produção (`TIPO_AMBIENTE=prod`), para otimização de desempenho o recurso `opcache.validate_timestamps` foi definido com valor `= 0`, ou seja, se algum arquivo for alterado este não será revalidado pelo opcache, sendo assim o usuário continuará vendo a versão anterior do arquivo. Para resolver isso você pode agir de duas formas, veja as soluçõe apresentadas no tópico seguinte.
+
+### Revalidar o cache
+
+#### Solução 1
+
+Edite o arquivo: `/usr/local/etc/php/php.ini`
+Altere: `opcache.validate_timestamps` de `0` para `1` e salve o arquivo
+Recarregue a configuração do apache: `/etc/init.d/apache2 reload`
+
+#### Solução 2
+
+Crie um arquivo php, como por exemplo `opcache-clear.php` e adicione este código a ele:
+
+```
+<?php echo opcache_reset(); ?>
+```
+
+Agora basta chamar o arquivo no navegador e o cache será esvaziado.
 
 ## Start container
 

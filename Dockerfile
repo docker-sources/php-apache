@@ -39,7 +39,10 @@ RUN apt-get install -y --no-install-recommends libjpeg-dev libpng-dev && \
     \
     # Instala a extensão soap
     apt-get install -y --no-install-recommends libxml2-dev && \
-    docker-php-ext-install soap
+    docker-php-ext-install soap; \
+    \
+    # Instala a extensão para cache de bytecode OPcache
+    docker-php-ext-install opcache
 
 # arquivos de configuração do Apache e PHP
 COPY config /usr/src/fabiojanio

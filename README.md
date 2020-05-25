@@ -1,4 +1,4 @@
-# php-apache:7.4-debian
+# php-apache
 
 <p align="center">
 	<img alt="logo-docker" class="avatar rounded-2" height="150" src="https://avatars2.githubusercontent.com/u/35675959?s=400&u=b1f9ebca6fa8e5be55cb524e16f38b52f2f1dd58&v=4" width="160">
@@ -107,7 +107,7 @@ Agora basta chamar o arquivo no navegador e o cache será esvaziado.
 Execute essa instrução para montar um volume compartilhado entre *host* e *container*:
 
 ```
-docker run -v /projeto:/var/www -d -p 80:80 --name nome_do_container fabiojanio/php-apache:7.4-stretch
+docker run -v /projeto:/var/www -d -p 80:80 --name nome_do_container fabiojanio/php-apache:7.4-debian
 ```
 
 **Obs**: no lugar de */projeto* você DEVE informar o caminho absoluto do diretório a ser compartilhado com o container.
@@ -115,7 +115,7 @@ docker run -v /projeto:/var/www -d -p 80:80 --name nome_do_container fabiojanio/
 Opcionalmente você PODE definir a variável **TIPO_AMBIENTE** como **dev**:
 
 ```
-docker run -v /projeto:/var/www -d -p 80:80 -e TIPO_AMBIENTE=dev --name nome_do_container fabiojanio/php-apache:7.4-stretch
+docker run -v /projeto:/var/www -d -p 80:80 -e TIPO_AMBIENTE=dev --name nome_do_container fabiojanio/php-apache:7.4-debian
 ```
 
 Ao omitir **TIPO_AMBIENTE** na criação do container o valor **prod** será automaticamente atribuido.

@@ -7,7 +7,7 @@ branches:
 
 env:
   global:
-    - VERSION=7.2 VARIANT=slim
+    - VERSION=7.4 VARIANT=debian
 
 before_script:
   - env | sort
